@@ -18,10 +18,11 @@ I am interested in understanding and correcting biases, especially in the contex
 
 Participants will be viewing one of two sets of 40 deception-judgement videos that are provided by the author. Each video will show an individual telling a story, and participants will determine whether the individual is lying or not. They will also be completing Plant and Devine's (1998) Internal and External Motivation to Respond Without Prejudice measure, Glaser and Knowles's (2008) Implicit Motivation to Control Prejudice task, and Kunstman et al. (2013) 17-item intergroup contact measure. Because I am not very familiar with amazon mechanical turk, I am expecting to have a some challenges within making sure that the stimuli will be represented correctly, without errors within the survey flow. Because I have not done statistical analysis for a while, I also expect some challenges within the data analysis bit. Fortunately, because the study is on OSF, I hope that it would be relatively easier to learn. 
 
-####repository
+####Repository
 https://github.com/sakaria4/lloyd2017.git
 
-####
+####Original paper
+https://github.com/sakaria4/lloyd2017/tree/master/original_paper
 
 
 
