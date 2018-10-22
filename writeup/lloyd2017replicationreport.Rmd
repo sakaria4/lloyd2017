@@ -31,19 +31,24 @@ https://github.com/sakaria4/lloyd2017/tree/master/original_paper
 
 ###Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+According to Lloyd et al.(2017), an a priori power analysis indicated that 67 participants are needed to achieve 80% power for the analysis. 
 
 ###Planned Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+67 White Americans
 
 ###Materials
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+- MU3D Videos
+- Plant and Devine's (1998) Internal and External Motivation to Respond Without Prejudice measure
+- Glaser and Knowles's (2008) Implicit Motivation to Control Prejudice task
+- Kunstman et al. (2013) 17-item intergroup contact measure.
+
 
 ###Procedure	
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+Participants were randomly assigned to view one of two sets of 40 deception-judgment videos (Lloyd et al., 2017; for details on the development of the stimuli, see the Supplemental Material). Videos featured Black and White college-age individuals describing acquaintances; each set of videos featured 20 positive descriptions and 20 negative descriptions, and valence was balanced across race. Participants saw each target person twice, once when the target was lying and once when the target was telling the truth. Within each set, videos were presented in random order. After each video, participants provided a truth/lie judgment, and they had an unlimited amount of time to respond. Participants were instructed that they might see the same individual multiple times but that they should base their judgments only on the current video because some individuals might tell only lies, some might tell only truths, and some might tell a combination of truths and lies. Participants completed the deception judgment task in addition to the IMS (M = 7.59, SD = 1.42, a = .86) and EMS (M = 4.77, SD = 1.60, a = .77). The only modification in the current study was that participants completed a 10-item measure assessing interpersonal contact both with Whites and with Blacks. Participants responded to each item on a 10-point scale with anchors of 0 and 9 or more (e.g., "How many Black [White] friends do you have in college?"; mean number of White contacts = 8.06, SD = 2.15, a= .85; mean number of Black contacts = 3.43, SD = 1.88, a = .76; adapted from Kunstman et al., 2013). Number of Black contacts, number of White contacts,  and the difference between them (i.e., White contacts minus Black contacts) did not moderate the findings
+reported (ps > .130).
 
 ###Analysis Plan
 
