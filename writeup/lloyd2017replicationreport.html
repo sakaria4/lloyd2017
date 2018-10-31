@@ -11,7 +11,7 @@
 
 <meta name="author" content="E. Paige Lloyd, Kurt Hugenberg, Allen R. McConnel, Jonathan W. Kunstman, &amp; Jason C. Deska" />
 
-<meta name="date" content="2018-10-22" />
+<meta name="date" content="2018-10-30" />
 
 <title>Replication of Study Black and White Lies:Race-Based Biases in Deception Judgements (2017, Psychological Science)</title>
 
@@ -228,7 +228,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Replication of Study Black and White Lies:Race-Based Biases in Deception Judgements (2017, Psychological Science)</h1>
 <h4 class="author"><em>E. Paige Lloyd, Kurt Hugenberg, Allen R. McConnel, Jonathan W. Kunstman, &amp; Jason C. Deska</em></h4>
-<h4 class="date"><em>October 22, 2018</em></h4>
+<h4 class="date"><em>October 30, 2018</em></h4>
 
 </div>
 
@@ -272,8 +272,7 @@ div.tocify {
 </div>
 <div id="analysis-plan" class="section level3">
 <h3>Analysis Plan</h3>
-<p>Can also quote directly, though it is less often spelled out effectively for an analysis strategy section. The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.</p>
-<p><strong>Clarify key analysis of interest here</strong> You can also pre-specify additional analyses you plan to do.</p>
+<p>Paird T-test between measurement of truth biases for black targets and white targets</p>
 </div>
 <div id="differences-from-original-study" class="section level3">
 <h3>Differences from Original Study</h3>
@@ -281,6 +280,7 @@ div.tocify {
 </div>
 <div id="methods-addendum-post-data-collection" class="section level3">
 <h3>Methods Addendum (Post Data Collection)</h3>
+<p>Actual Survey: <a href="https://stanforduniversity.qualtrics.com/jfe/form/SV_0xEoNJ4XHC1a85v" class="uri">https://stanforduniversity.qualtrics.com/jfe/form/SV_0xEoNJ4XHC1a85v</a></p>
 <p>You can comment this section out prior to final report with data collection.</p>
 <div id="actual-sample" class="section level4">
 <h4>Actual Sample</h4>
@@ -297,11 +297,54 @@ div.tocify {
 <div id="data-preparation" class="section level3">
 <h3>Data preparation</h3>
 <p>Data preparation following the analysis plan.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Warning: package 'tidyverse' was built under R version 3.4.4</code></pre>
+<pre><code>## -- Attaching packages ---------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 3.0.0     v purrr   0.2.5
+## v tibble  1.4.2     v dplyr   0.7.6
+## v tidyr   0.8.1     v stringr 1.3.1
+## v readr   1.1.1     v forcats 0.3.0</code></pre>
+<pre><code>## Warning: package 'ggplot2' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'tibble' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'tidyr' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'readr' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'purrr' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'stringr' was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package 'forcats' was built under R version 3.4.4</code></pre>
+<pre><code>## -- Conflicts ------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(readxl)</code></pre>
+<pre><code>## Warning: package 'readxl' was built under R version 3.4.4</code></pre>
+<pre class="r"><code>library(effsize)</code></pre>
+<pre><code>## Warning: package 'effsize' was built under R version 3.4.4</code></pre>
+<pre class="r"><code>setwd(&quot;C:/Users/sakar/Desktop&quot;)
+
+lloyd1c &lt;- read_excel(&quot;lloyd20171cdata.xlsx&quot;)</code></pre>
+<pre class="r"><code>View(lloyd1c)</code></pre>
+<pre class="r"><code>filtered_lloyd1c = lloyd1c %&gt;% 
+  filter(!is.na(filter) &amp; filter == 1 &amp; Ps != 63)</code></pre>
+<pre><code>## Warning: package 'bindrcpp' was built under R version 3.4.4</code></pre>
+<pre class="r"><code>View(filtered_lloyd1c)</code></pre>
 </div>
 <div id="confirmatory-analysis" class="section level3">
 <h3>Confirmatory analysis</h3>
-<p>The analyses as specified in the analysis plan.</p>
-<p><em>Side-by-side graph with original graph is ideal here</em></p>
+<pre class="r"><code>#T-test on truth biases towards race 
+
+#Statistic that was reported
+t.test(filtered_lloyd1c$Bcrit, filtered_lloyd1c$Wcrit, paired = TRUE)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  filtered_lloyd1c$Bcrit and filtered_lloyd1c$Wcrit
+## t = 8.3034, df = 57, p-value = 2.159e-11
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.3888387 0.6359889
+## sample estimates:
+## mean of the differences 
+##               0.5124138</code></pre>
 </div>
 <div id="exploratory-analyses" class="section level3">
 <h3>Exploratory analyses</h3>

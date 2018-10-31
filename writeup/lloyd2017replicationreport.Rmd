@@ -52,15 +52,16 @@ reported (ps > .130).
 
 ###Analysis Plan
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+Paird T-test between measurement of truth biases for black targets and white targets
 
-**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
 
 ###Differences from Original Study
 
 Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
 
 ### Methods Addendum (Post Data Collection)
+
+Actual Survey: https://stanforduniversity.qualtrics.com/jfe/form/SV_0xEoNJ4XHC1a85v
 
 You can comment this section out prior to final report with data collection.
 
@@ -78,23 +79,46 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
-```{r include=F}
-###Data Preparation
 
-####Load Relevant Libraries and Functions
-
-####Import data
-
-#### Data exclusion / filtering
-
-#### Prepare data for analysis - create columns etc.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(effsize)
+
+setwd("C:/Users/sakar/Desktop")
+
+lloyd1c <- read_excel("lloyd20171cdata.xlsx")
+
+```
+
+```{r}
+View(lloyd1c)
+```
+
+```{r}
+filtered_lloyd1c = lloyd1c %>% 
+  filter(!is.na(filter) & filter == 1 & Ps != 63)
+```
+
+```{r}
+View(filtered_lloyd1c)
+```
+
+
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+```{r}
+#T-test on truth biases towards race 
 
-*Side-by-side graph with original graph is ideal here*
+#Statistic that was reported
+t.test(filtered_lloyd1c$Bcrit, filtered_lloyd1c$Wcrit, paired = TRUE)
+
+```
 
 ###Exploratory analyses
 
