@@ -33,9 +33,11 @@ https://github.com/sakaria4/lloyd2017/tree/master/original_paper
 
 According to Lloyd et al.(2017), an a priori power analysis indicated that 67 participants are needed to achieve 80% power for the analysis. 
 
+Using their data in their achieved effect size of 1.09. I require 9 participants. I divided the effect size in half and using G*power indicated that I would need 27 participants. 
+
 ###Planned Sample
 
-67 White Americans
+27 White Americans
 
 ###Materials
 
@@ -47,12 +49,11 @@ According to Lloyd et al.(2017), an a priori power analysis indicated that 67 pa
 
 ###Procedure	
 
-Participants were randomly assigned to view one of two sets of 40 deception-judgment videos (Lloyd et al., 2017; for details on the development of the stimuli, see the Supplemental Material). Videos featured Black and White college-age individuals describing acquaintances; each set of videos featured 20 positive descriptions and 20 negative descriptions, and valence was balanced across race. Participants saw each target person twice, once when the target was lying and once when the target was telling the truth. Within each set, videos were presented in random order. After each video, participants provided a truth/lie judgment, and they had an unlimited amount of time to respond. Participants were instructed that they might see the same individual multiple times but that they should base their judgments only on the current video because some individuals might tell only lies, some might tell only truths, and some might tell a combination of truths and lies. Participants completed the deception judgment task in addition to the IMS (M = 7.59, SD = 1.42, a = .86) and EMS (M = 4.77, SD = 1.60, a = .77). The only modification in the current study was that participants completed a 10-item measure assessing interpersonal contact both with Whites and with Blacks. Participants responded to each item on a 10-point scale with anchors of 0 and 9 or more (e.g., "How many Black [White] friends do you have in college?"; mean number of White contacts = 8.06, SD = 2.15, a= .85; mean number of Black contacts = 3.43, SD = 1.88, a = .76; adapted from Kunstman et al., 2013). Number of Black contacts, number of White contacts,  and the difference between them (i.e., White contacts minus Black contacts) did not moderate the findings
-reported (ps > .130).
+Participants were randomly assigned to view one of two sets of 40 deception-judgment videos (Lloyd et al., 2017; for details on the development of the stimuli, see the Supplemental Material). Videos featured Black and White college-age individuals describing acquaintances; each set of videos featured 20 positive descriptions and 20 negative descriptions, and valence was balanced across race. Participants saw each target person twice, once when the target was lying and once when the target was telling the truth. Within each set, videos were presented in random order. After each video, participants provided a truth/lie judgment, and they had an unlimited amount of time to respond. Participants were instructed that they might see the same individual multiple times but that they should base their judgments only on the current video because some individuals might tell only lies, some might tell only truths, and some might tell a combination of truths and lies. Participants completed the deception judgment task in addition to the IMS (M = 7.59, SD = 1.42, a = .86) and EMS (M = 4.77, SD = 1.60, a = .77). The only modification in the current study was that participants completed a 10-item measure assessing interpersonal contact both with Whites and with Blacks. Participants responded to each item on a 10-point scale with anchors of 0 and 9 or more (e.g., "How many Black [White] friends do you have in college?"; mean number of White contacts = 8.06, SD = 2.15, a= .85; mean number of Black contacts = 3.43, SD = 1.88, a = .76; adapted from Kunstman et al., 2013). Number of Black contacts, number of White contacts,  and the difference between them (i.e., White contacts minus Black contacts) did not moderate the findings reported (ps > .130).
 
 ###Analysis Plan
 
-Paird T-test between measurement of truth biases for black targets and white targets
+Paired T-test between measurement of truth biases for black targets and white targets
 
 
 ###Differences from Original Study
@@ -88,41 +89,59 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 library(effsize)
+library(dplyr)
 
-setwd("C:/Users/sakar/Desktop")
-
-lloyd1c <- read_excel("lloyd20171cdata.xlsx")
+lloyd1c <- read_xlsx("Copy of Lloyd et al. 2017 Replication_November 25, 2018_21.02.xlsx")
 
 ```
 
 ```{r}
-View(lloyd1c)
+#taking out all the data except for the relevant questions that I am measuring
+filter1c <- lloyd1c %>%
+  select(-starts_with("Q")) %>%
+  filter(!is.na(MTurkCode)) %>%
+  select(BMNL1:WMNT40, MTurkCode)%>%
+
+  #Something is wrong with BMNL23 data. Keeps classifying as class as character
+  mutate(BMNL23 = as.numeric(BMNL23))
+
+#sapply(filter1c, mode)
+  
+#View(filter1c)
 ```
 
 ```{r}
-filtered_lloyd1c = lloyd1c %>% 
-  filter(!is.na(filter) & filter == 1 & Ps != 63)
+#Bcrit1 = 1:20
+# Wcrit1 = 21:40
+# Bcrit2 = 41:60
+# Wcrit2 = 61:80
+mean1c <- filter1c 
+  #Not too sure why BMNL23 has a class of character
+mean1c <- mean1c %>%
+  mutate(BMNL23 = as.numeric(BMNL23),
+         Bcrit1 = rowMeans(mean1c[,1:20], na.rm = TRUE),
+         Bcrit2 = rowMeans(mean1c[,41:60], na.rm = TRUE),
+         Wcrit2 = rowMeans(mean1c[,21:40], na.rm = TRUE),
+         Wcrit1 = rowMeans(mean1c[,61:80], na.rm = TRUE))
+
+
+mean1c <- mean1c %>%
+  mutate(Bmean = rowMeans(mean1c[,82:83], na.rm =TRUE),
+         Wmean = rowMeans(mean1c[,84:85], na.rm =TRUE))
+
+View(mean1c)
 ```
-
-```{r}
-View(filtered_lloyd1c)
-```
-
-
 
 ### Confirmatory analysis
 
 ```{r}
 #T-test on truth biases towards race 
+t.test(mean1c$Bmean, mean1c$Wmean, paired = TRUE)
 
-#Statistic that was reported
-t.test(filtered_lloyd1c$Bcrit, filtered_lloyd1c$Wcrit, paired = TRUE)
+#not significant with the 2 samples that I collected.
 
 ```
 
-###Exploratory analyses
-
-Any follow-up analyses desired (not required).  
 
 ## Discussion
 
